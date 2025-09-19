@@ -30,7 +30,7 @@ def dbai():
 def _copy_templates():
     """Copy template files to create project scaffolding."""
     # Get the template directory (relative to this module)
-    template_dir = Path(__file__).parent.parent.parent.parent / "templates"
+    template_dir = Path(__file__).parent.parent.parent / "templates"
 
     if not template_dir.exists():
         console.print(f"❌ [red]Template directory not found: {template_dir}[/red]")
