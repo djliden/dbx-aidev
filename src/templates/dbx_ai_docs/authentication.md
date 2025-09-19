@@ -1,6 +1,6 @@
 # Authentication Quick Reference
 
-This file provides a quick authentication reference. For comprehensive CLI authentication commands, see `cli-auth.md`.
+This file provides a quick authentication reference. For comprehensive CLI authentication commands, see `cli-auth.md`. For advanced SDK authentication patterns, see `sdk-execution/sdk-auth-patterns.md`.
 
 ## SDK Authentication Patterns
 
@@ -48,6 +48,12 @@ databricks auth token --host https://workspace-url
 # Test authentication
 databricks auth describe
 ```
+
+## Execution Utilities
+For programmatic execution capabilities that complement CLI workflows:
+- **Notebook execution**: See `sdk-execution/notebook-execution.md`
+- **SQL execution**: See `sdk-execution/sql-execution.md`
+- **Advanced authentication**: See `sdk-execution/sdk-auth-patterns.md`
 
 ## Safety Notes
 - Store tokens securely, never commit to version control

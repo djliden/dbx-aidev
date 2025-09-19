@@ -17,6 +17,7 @@ dbai = "cli.cli:app"
 [project.optional-dependencies]
 dev = [
     "ruff>=0.1.6",
+    "pytest>=7.0.0",
 ]
 
 [build-system]

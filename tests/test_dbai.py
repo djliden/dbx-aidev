@@ -33,6 +33,7 @@ def test_dbai_command_creates_scaffolding():
       # Check that expected files were created
       assert (temp_path / 'CLAUDE.md').exists()
       assert (temp_path / 'dbx_ai_docs').is_dir()
+      assert (temp_path / 'dbx_execution').is_dir()
       assert (temp_path / '.claude' / 'commands' / 'dbx-setup.md').exists()
       assert (temp_path / '.claude' / 'commands' / 'docs.md').exists()
 
@@ -40,6 +41,12 @@ def test_dbai_command_creates_scaffolding():
       assert (temp_path / 'dbx_ai_docs' / 'cli-overview.md').exists()
       assert (temp_path / 'dbx_ai_docs' / 'cli-workspace.md').exists()
       assert (temp_path / 'dbx_ai_docs' / 'safety-guidelines.md').exists()
+
+      # Check execution scripts were created
+      assert (temp_path / 'dbx_execution' / '__init__.py').exists()
+      assert (temp_path / 'dbx_execution' / 'sql_executor.py').exists()
+      assert (temp_path / 'dbx_execution' / 'notebook_executor.py').exists()
+      assert (temp_path / 'dbx_execution' / 'utils.py').exists()
 
     finally:
       os.chdir(original_cwd)
@@ -168,8 +175,8 @@ def test_dbai_command_merge_claude_commands():
 
       # Mock the Confirm.ask to return True for commands prompt
       with patch('src.cli.commands.dbai.Confirm.ask') as mock_confirm:
-        # Return False for CLAUDE.md, False for docs, True for commands
-        mock_confirm.side_effect = [False, False, True]
+        # Return False for CLAUDE.md, False for docs, False for execution, True for commands
+        mock_confirm.side_effect = [False, False, False, True]
 
         result = runner.invoke(app, [])
 
@@ -207,8 +214,8 @@ def test_dbai_command_replace_docs_directory():
 
       # Mock the Confirm.ask to return True for docs prompt
       with patch('src.cli.commands.dbai.Confirm.ask') as mock_confirm:
-        # Return False for CLAUDE.md, True for docs, False for commands (no commands yet)
-        mock_confirm.side_effect = [False, True]
+        # Return False for CLAUDE.md, True for docs, False for execution, False for commands (no commands yet)
+        mock_confirm.side_effect = [False, True, False]
 
         result = runner.invoke(app, [])
 
@@ -311,8 +318,8 @@ def test_dbai_command_claude_commands_duplicate_files():
 
       # Mock the Confirm.ask to return True for commands prompt
       with patch('src.cli.commands.dbai.Confirm.ask') as mock_confirm:
-        # Return False for CLAUDE.md, False for docs, True for commands
-        mock_confirm.side_effect = [False, False, True]
+        # Return False for CLAUDE.md, False for docs, False for execution, True for commands
+        mock_confirm.side_effect = [False, False, False, True]
 
         result = runner.invoke(app, [])
 

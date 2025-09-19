@@ -22,6 +22,7 @@ def dbai():
 
   console.print('✅ [green]Databricks AI documentation scaffolding created![/green]')
   console.print('📚 [blue]Documentation:[/blue] dbx_ai_docs/')
+  console.print('🔧 [blue]Execution scripts:[/blue] dbx_execution/')
   console.print('📝 [blue]Project overview:[/blue] CLAUDE.md')
   console.print('🤖 [blue]AI commands:[/blue] .claude/commands/')
   console.print()
@@ -68,6 +69,21 @@ def _copy_templates():
         console.print(f'  ✓ Replaced {docs_dst}/')
       else:
         console.print('📚 [yellow]dbx_ai_docs/ already exists, skipping...[/yellow]')
+
+  # Copy execution scripts directory
+  execution_src = template_dir / 'dbx_execution'
+  execution_dst = Path('dbx_execution')
+  if execution_src.exists():
+    if not execution_dst.exists():
+      shutil.copytree(execution_src, execution_dst)
+      console.print(f'  ✓ Created {execution_dst}/')
+    else:
+      if Confirm.ask('🔧 dbx_execution/ already exists. Replace with latest execution scripts?'):
+        shutil.rmtree(execution_dst)
+        shutil.copytree(execution_src, execution_dst)
+        console.print(f'  ✓ Replaced {execution_dst}/')
+      else:
+        console.print('🔧 [yellow]dbx_execution/ already exists, skipping...[/yellow]')
 
   # Handle .claude commands with merge option
   claude_commands_src = template_dir / '.claude' / 'commands'

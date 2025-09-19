@@ -4,6 +4,8 @@
 
 The Databricks CLI is organized into **command groups** with consistent patterns. This is your entry point for understanding how to work with the CLI effectively.
 
+For execution capabilities the CLI lacks, see the SDK execution modules: `sdk-execution/notebook-execution.md` and `sdk-execution/sql-execution.md`.
+
 ## Basic Structure
 ```bash
 databricks <command-group> <command> [options]
