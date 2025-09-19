@@ -1,13 +1,11 @@
 import typer
 
-from .commands.hello import hello
-from .commands.goodbye import goodbye
+from .commands.dbai import dbai
 
 app = typer.Typer()
 
-# Register commands
-app.command()(hello)
-app.command()(goodbye)
+# Register main command as the default function
+app.callback(invoke_without_command=True)(dbai)
 
 if __name__ == '__main__':
     app()

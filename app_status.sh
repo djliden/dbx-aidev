@@ -49,7 +49,7 @@ echo "================================="
 
 # Check if we're in the right directory
 if [ ! -f "pyproject.toml" ] || [ ! -d "src/cli" ] || [ ! -f "app.py" ]; then
-    echo -e "${ERROR} ${RED}Not in a CLI app template directory${NC}"
+    echo -e "${ERROR} ${RED}Not in a dbx-aidev project directory${NC}"
     echo "Please run this script from the root of your CLI app project"
     echo "Expected files: pyproject.toml, app.py, src/cli/"
     exit 1
@@ -127,8 +127,8 @@ fi
 # Step 4: Implementation
 echo -e "\n${BLUE}Step 4: Implementation${NC}"
 if [ -d "src/cli/commands" ]; then
-    # Count non-template command files (exclude hello.py and goodbye.py)
-    CUSTOM_COMMANDS=$(find src/cli/commands -name "*.py" -not -name "__init__.py" -not -name "hello.py" -not -name "goodbye.py" 2>/dev/null | wc -l || echo 0)
+    # Count custom command files
+    CUSTOM_COMMANDS=$(find src/cli/commands -name "*.py" -not -name "__init__.py" 2>/dev/null | wc -l || echo 0)
     
     if [ "$CUSTOM_COMMANDS" -gt 0 ]; then
         echo -e "${CHECK_MARK} ${GREEN}Implementation in progress${NC}"
@@ -139,7 +139,7 @@ if [ -d "src/cli/commands" ]; then
             echo "  • Total command modules: $(find src/cli/commands -name "*.py" -not -name "__init__.py" 2>/dev/null | wc -l || echo 0)"
         fi
     else
-        echo -e "${PENDING} ${YELLOW}Implementation not started (only template commands exist)${NC}"
+        echo -e "${PENDING} ${YELLOW}Implementation not started${NC}"
         STEP4_COMPLETE=false
     fi
 else
